@@ -1,0 +1,37 @@
+div {
+  font-family:arial;
+  font-size:large;
+}
+a {
+  text-decoration:none;
+  color:blue;
+}
+#sidebar {
+  width:15%;
+  height:100vh;
+  float:left;
+  padding:2.5% 2.5% 0% 2.5%;
+  background-color:ivory;
+  font-size:xx-large;
+  position:fixed;
+}
+#content {
+  width:75%;
+  height:100vh;
+  float:right;
+  padding:2.5% 2.5% 0% 2.5%;
+}
+#teammemberlist {
+  display:flex;
+  align-items:flex-end;
+}
+#teammember {
+  width:20%;
+  float:left;
+  padding:5% 5% 0% 5%;
+}
+#profilepic {
+  max-width:100%;
+  max-height:auto;
+  object-fit:contain;
+}
