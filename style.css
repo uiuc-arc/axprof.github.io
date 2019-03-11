@@ -35,3 +35,12 @@ img.profilepic {
   max-height:auto;
   object-fit:contain;
 }
+code {
+  background-color:lightgray;
+}
+pre code {
+  background-color:lightgray;
+  border:1px solid black;
+  display:block;
+  padding:1%;
+}
