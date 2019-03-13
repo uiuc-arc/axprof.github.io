@@ -1,46 +1,35 @@
-div {
-  font-family:arial;
-  font-size:large;
-}
-a {
-  text-decoration:none;
-  color:blue;
-}
-#sidebar {
-  width:15%;
-  height:100vh;
-  float:left;
-  padding:2.5% 2.5% 0% 2.5%;
-  background-color:ivory;
-  font-size:xx-large;
-  position:fixed;
-}
-#content {
-  width:75%;
-  height:100vh;
-  float:right;
-  padding:2.5% 2.5% 0% 2.5%;
-}
-#teammemberlist {
-  display:flex;
-  align-items:flex-end;
-}
 div.teammember {
-  width:20%;
-  float:left;
-  padding:5% 5% 0% 5%;
+    width: 40px;
 }
-img.profilepic {
-  max-width:100%;
-  max-height:auto;
-  object-fit:contain;
+
+.container  .img-responsive {
+    display: block;
+    width: auto;
+    max-height: 100%;
 }
-code {
-  background-color:lightgray;
+
+.navbar-custom {
+    background-color: #263b54;
 }
-pre code {
-  background-color:lightgray;
-  border:1px solid black;
-  display:block;
-  padding:1%;
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #ffffff;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #ffffff;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ff5500;
+}
+
+.navbar-toggler {
+    background-color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
 }
