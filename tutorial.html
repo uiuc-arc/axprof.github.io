@@ -71,6 +71,8 @@
                 sys.path.append('AXPROF_HOME/AxProf')
                 import AxProf
             </code></pre>
+            <p>Here, <code>AXPROF_HOME</code> refers to the root directory of the AxProf repository.</p>
+            
             <hr>
             
             <p>We specify a list of configurations that will be
@@ -143,7 +145,7 @@
             available in <code>AxProf/AxProfGenerators.py</code>. </p>
             <pre><code class="prettyprint">
                 def inputParams(config, inputNum):
-                return [config['coins'], 0, 1000000]
+                  return [config['coins'], 0, 1000000]
             </code></pre>
 
             <p>This tells
