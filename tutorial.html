@@ -76,16 +76,17 @@
             <hr>
             
             <p>We specify a list of configurations that will be
-            tested.  For this program the only configuration parameter
-            is the number of coins.  The list of configurations is
+            tested. The list of configurations is
             provided as a dictionary with the name of the
             configuration parameter as the key and the list of values
             for that parameter as the value.  AxProf will test all
             combinations of configuration parameters.  For example, if
             there are two parameters A and B where A can be 1 or 2 and
-            B can be 3 or 4, AxProf will test a total of four
+            B can be 3 or 4, AxProf tests a total of four
             configurations:
-            <code class="prettyprint">[{A:1,B:3},{A:1,B:4},{A:2,B:3},{A:2,B:4}]</code></p>
+            <span style="white-space:nowrap;"><code class="prettyprint">[{A:1,B:3},{A:1,B:4},{A:2,B:3},{A:2,B:4}]</code></span>.
+            For this program, the only configuration parameter
+            is the number of coins. The parameter values are given as follows.</p>
             <pre><code class="prettyprint">
                 configList = {'coins':[10,100,1000]}
             </code></pre>
