@@ -53,6 +53,26 @@
             Each head is worth 1 and each tail is worth 0. It returns the sum as the output.
             We use AxProf to check that the program is using a fair coin.
             If so, the sum must be approximately equal to half of the number of coins.</p>
+            
+            <pre><code class="prettyprint">
+                def flipCoins(numCoins):
+                  random.seed() # Seed RNG
+                  coinSum = 0
+                  for i in range(numCoins):
+                    # Randomly pick 0 or 1 and add it to the sum
+                    # Adding more 0s or 1s will skew the results to simulate an unfair coin
+                    # AxProf should be able to detect this skew (unless it is small)
+                    coinSum += random.choice([0,1])
+                  return coinSum
+            </code></pre>
+
+            <p>The <code>flipCoins</code> function flips the coins,
+            adds their face values, measures the time taken to do so,
+            and returns the output. In this simple case, this function
+            comprises the entirety of the implementation of the coin flip
+            program that we are testing with AxProf. The rest of the code
+            is used to test this implementation using AxProf.</p>
+            
             <hr>
             First we import some required Python modules.
             You might need others for your test script.
@@ -175,25 +195,7 @@
                   # Prepare result; we don't measure memory but must specify it, so set it to 0
                   result = {'acc': coinSum, 'time': (endTime-startTime), 'space': 0}
                   return result
-                
-                
-                def flipCoins(numCoins):
-                  random.seed() # Seed RNG
-                  coinSum = 0
-                  for i in range(numCoins):
-                    # Randomly pick 0 or 1 and add it to the sum
-                    # Adding more 0s or 1s will skew the results to simulate an unfair coin
-                    # AxProf should be able to detect this skew (unless it is small)
-                    coinSum += random.choice([0,1])
-                  return coinSum
             </code></pre>
-
-            <p>The <code>flipCoins</code> function flips the coins,
-            adds their face values, measures the time taken to do so,
-            and returns the output. In this simple case, this function
-            comprises the entirety of the implementation of the coin flip
-            program that we are testing with AxProf. The rest of the code
-            is used to test this implementation using AxProf.</p>
             <hr>
             Finally, we invoke AxProf's checkProperties function.
             It takes the following parameters:
