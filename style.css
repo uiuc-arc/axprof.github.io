@@ -33,3 +33,34 @@ div.teammember {
 .navbar-toggler-icon {
     background-color: #fff;
 }
+
+hr {
+    margin-top: 0;
+}
+
+hr.divider { 
+  margin-top: 0em;
+  border-width: 2px;
+} 
+
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+pre {
+    display: inline;
+    margin: 0;
+}
+
+pre:first-line {
+    line-height: 0px;
+}
+
+
+/* pre { display: inline} */
