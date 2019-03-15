@@ -73,22 +73,32 @@
             </code></pre>
             <hr>
             
-            <p>We specify a list of configurations that will be tested.
-            For this program the only configuration parameter is the number of coins.
-            The list of configurations is provided as a dictionary with the name of the configuration parameter as the key and the list of values for that parameter as the value.
-            AxProf will test all combinations of configuration parameters.
-            For example, if there are two parameters A and B where A can be 1 or 2 and B can be 3 or 4, AxProf will test a total of four configurations:</p>
-            <code>[{A:1,B:3},{A:1,B:4},{A:2,B:3},{A:2,B:4}]</code>
+            <p>We specify a list of configurations that will be
+            tested.  For this program the only configuration parameter
+            is the number of coins.  The list of configurations is
+            provided as a dictionary with the name of the
+            configuration parameter as the key and the list of values
+            for that parameter as the value.  AxProf will test all
+            combinations of configuration parameters.  For example, if
+            there are two parameters A and B where A can be 1 or 2 and
+            B can be 3 or 4, AxProf will test a total of four
+            configurations:
+            <code class="prettyprint">[{A:1,B:3},{A:1,B:4},{A:2,B:3},{A:2,B:4}]</code></p>
             <pre><code class="prettyprint">
                 configList = {'coins':[10,100,1000]}
             </code></pre>
             <hr>
-            The specification gives AxProf the information necessary to check that the program output is correct.
-            The specification consists of a list of type declarations, followed by a TIME specification, SPACE specification, and ACCuracy specification.
-            The specifications are optional, but they must be present in this order.
-            Each type declaration or specification must be separated by a semicolon.
-            The type of the Input and the Output must always be declared.
-            The return type of any external functions used must also be declared.
+            <p>The specification gives AxProf the information necessary
+            to check that the program output is correct.  The
+            specification consists of a list of type declarations,
+            followed by a TIME specification, SPACE specification, and
+            ACCURACY specification.  The specifications are optional,
+            but they must be present in this order.  Each type
+            declaration or specification must be separated by a
+            semicolon.  The type of the Input and the Output must
+            always be declared.  The return type of any external
+              functions used must also be declared.</p>
+            
             <pre><code class="prettyprint">
                 spec='''
                      Input list of real;
