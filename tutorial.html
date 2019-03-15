@@ -166,28 +166,34 @@
             implementation accuracy, the amount of time consumed, and
             the amount of memory used.  The task of time and memory
             usage measurement is left to the runner.</p>
-
-            In this case we do not need to call an external program.
-            We flip the coins, add their face values, measure the time
-            taken to do so, and return the output.
+            
             <pre><code class="prettyprint">
                 def runner(inputFileName, config):
-                  numCoins = config['coins']
+                  startTime = time.time() # Start measuring time
+                  coinSum = flipCoins(config['coins'])
+                  endTime = time.time() # Stop measuring time
+                  # Prepare result; we don't measure memory but must specify it, so set it to 0
+                  result = {'acc': coinSum, 'time': (endTime-startTime), 'space': 0}
+                  return result
+                
+                
+                def flipCoins(numCoins):
                   random.seed() # Seed RNG
                   coinSum = 0
-                
-                  startTime = time.time() # Start measuring time
                   for i in range(numCoins):
                     # Randomly pick 0 or 1 and add it to the sum
                     # Adding more 0s or 1s will skew the results to simulate an unfair coin
                     # AxProf should be able to detect this skew (unless it is small)
                     coinSum += random.choice([0,1])
-                  endTime = time.time() # Stop measuring time
-                
-                  # Prepare result; we don't measure memory but must specify it, so set it to 0
-                  result = {'acc': coinSum, 'time': (endTime-startTime), 'space': 0}
-                  return result
+                  return coinSum
             </code></pre>
+
+            <p>The <code>flipCoins</code> function flips the coins,
+            adds their face values, measures the time taken to do so,
+            and returns the output. In this simple case, this function
+            comprises the entirety of the implementation of the coin flip
+            program that we are testing with AxProf. The rest of the code
+            is used to test this implementation using AxProf.</p>
             <hr>
             Finally, we invoke AxProf's checkProperties function.
             It takes the following parameters:
@@ -204,7 +210,7 @@
             <p>Apart from this, it takes multiple optional parameters.
             Usually, only the specification needs to be provided.
             AxProf will generate all necessary code from the specification and use it to test the program.
-            It is important to use <code>if __name__ == '__main__':</code> when invoking AxProf.
+            It is important to use <code>if __name__ == '__main__':</code> when invoking AxProf to prevent circular dependencies in AxProf generated code.
             We also measure the total time taken to use AxProf.</p>
             <pre><code class="prettyprint">
                 if __name__ == '__main__':
@@ -225,13 +231,13 @@
             time data to a file, and fit a curve to the time data (in
             this case a linear function over the number of coins).
             Next, it prints the chosen number of runs (in this case
-            200).  Finally it runs the implementation for each
+            200). It runs the implementation for each
             configuration.  If any errors are detected, it
             prints <code>Checker detected a possible error</code>.
             Otherwise it silently completes execution.  Lastly, it
             prints the optimal curve fit parameters and the R^2 metric
             of the fit.  The time usage data is also written to the
-            cutputs directory that is created in this
+            outputs directory that is created in this
             directory.</p>
 
             <p>Try editing the line above that
