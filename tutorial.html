@@ -53,15 +53,14 @@
             Each head is worth 1 and each tail is worth 0. It returns the sum as the output.
             We use AxProf to check that the program is using a fair coin.
             If so, the sum must be approximately equal to half of the number of coins.</p>
-            <hr>
+            <hr class="divider">
             First we import some required Python modules.
             You might need others for your test script.
             <pre><code class="prettyprint">
                 import random
                 import sys
-                import time
-            </code></pre>
-            <hr>
+                import time</code></pre>
+            <hr class="divider">
             <p>The script must import AxProf.
             One way to achieve this is given below, but it assumes that AxProf is present in a particular path relative to the script.
             A better way would be to add the AxProf directory to the
@@ -69,13 +68,12 @@
             
             <pre><code class="prettyprint">
                 sys.path.append('AXPROF_HOME/AxProf')
-                import AxProf
-            </code></pre>
+                import AxProf</code></pre>
             <p>Here, <code>AXPROF_HOME</code> refers to the root directory of the AxProf repository.</p>
             
-            <hr>
+            <hr class="divider">
             
-            <p>We specify a list of configurations that will be
+            <p align="justify">We specify a list of configurations that will be
             tested. The list of configurations is
             provided as a dictionary with the name of the
             configuration parameter as the key and the list of values
@@ -88,10 +86,10 @@
             For this program, the only configuration parameter
             is the number of coins. The parameter values are given as follows.</p>
             <pre><code class="prettyprint">
-                configList = {'coins':[10,100,1000]}
-            </code></pre>
-            <hr>
-            <p>The specification gives AxProf the information necessary
+                configList = {'coins':[10,100,1000]} <!--
+            --></code></pre>
+            <hr class="divider">
+            <p align="justify">The specification gives AxProf the information necessary
             to check that the program output is correct.  The
             specification consists of a list of type declarations,
             followed by a TIME specification, SPACE specification, and
@@ -108,10 +106,10 @@
                      Output real;
                      TIME coins;
                      ACC Expectation over runs [Output] == coins/2
-                     '''
-            </code></pre>
+                     '''<!--
+            --></code></pre>
 
-            <p>The above specification states that the input is a list
+            <p align="justify">The above specification states that the input is a list
             of real numbers.  We will be generating an input for
             illustrative purposes, but we will not use it.  The output
             is a real number (the sum of the coin face values).  We
@@ -126,14 +124,14 @@
             configuration list.  A SPACE specification is not given
             here.</p>
 
-            This specification is very simple compared to some of the
+            <p align="justify">This specification is very simple compared to some of the
             specifications for the other benchmarks.  See the
             benchmark script files for more examples of
             specifications, including probability specifications and
-            specifications with universal quantification.
+            specifications with universal quantification.</p>
             <hr>
 
-            <p>AxProf requires a function that it uses to generate
+            <p align="justify">AxProf requires a function that it uses to generate
             parameters for the input generators.  This function takes
             the current configuration being tested and the input
             number, and returns a list of parameters to be passed to
@@ -146,16 +144,16 @@
             available in <code>AxProf/AxProfGenerators.py</code>. </p>
             <pre><code class="prettyprint">
                 def inputParams(config, inputNum):
-                  return [config['coins'], 0, 1000000]
-            </code></pre>
+                  return [config['coins'], 0, 1000000] <!--
+            --> </code></pre>
 
             <p>This tells
             AxProf's <code>distinctIntegerGenerator</code> to generate
             distinct integers between 0 and 1000000.  The number of
             integers generated is equal to the number of coins.</p>
-            <hr>
+            <hr class="divider">
 
-            <p>The runner is the interface to the implementation being
+            <p align="justify">The runner is the interface to the implementation being
             tested.  It accepts the input file name and the current
             configuration being tested as parameters.  It then runs
             the implementation with the given input and configuration.
@@ -185,16 +183,16 @@
                     # Adding more 0s or 1s will skew the results to simulate an unfair coin
                     # AxProf should be able to detect this skew (unless it is small)
                     coinSum += random.choice([0,1])
-                  return coinSum
-            </code></pre>
+                  return coinSum<!--
+            --></code></pre>
 
-            <p>The <code>flipCoins</code> function flips the coins,
+            <p align="justify">The <code class="prettify">flipCoins</code> function flips the coins,
             adds their face values, measures the time taken to do so,
             and returns the output. In this simple case, this function
             comprises the entirety of the implementation of the coin flip
             program that we are testing with AxProf. The rest of the code
             is used to test this implementation using AxProf.</p>
-            <hr>
+            <hr class="divider">
             Finally, we invoke AxProf's checkProperties function.
             It takes the following parameters:
             <ol>
@@ -207,22 +205,25 @@
               <li> The runner i.e. the application interface.
             </ol>
 
-            <p>Apart from this, it takes multiple optional parameters.
+            <p align="justify">Apart from this, it takes multiple optional parameters.
             Usually, only the specification needs to be provided.
-            AxProf will generate all necessary code from the specification and use it to test the program.
-            It is important to use <code>if __name__ == '__main__':</code> when invoking AxProf to prevent circular dependencies in AxProf generated code.
-            We also measure the total time taken to use AxProf.</p>
+            AxProf will generate all necessary code from the
+            specification and use it to test the program.  It is
+            important to use <code>if __name__ == '__main__':</code>
+            when invoking AxProf to prevent circular dependencies in
+            AxProf generated code.  We also measure the total time
+            taken to use AxProf.</p>
             <pre><code class="prettyprint">
                 if __name__ == '__main__':
                   startTime = time.time() # Start measuring time
                   AxProf.checkProperties(configList, None, 1, AxProf.distinctIntegerGenerator,
                                          inputParams, runner, spec=spec)
                   endTime = time.time() # Stop measuring time
-                  print('Total time required for checking:',endTime-startTime,'seconds.')
-            </code></pre>
-            <hr>
+                  print('Total time required for checking:',endTime-startTime,'seconds.')<!--
+            --> </code></pre>
+            <hr class="divider">
 
-            <p>The complete script is available in
+            <p align="justify">The complete script is available in
             the <a href="https://github.com/uiuc-arc/AxProf/tree/master/tutorial">tutorial</a>
             directory.  To run this script, run <code>python3
             tutorial.py</code> from the same directory.  First, AxProf
