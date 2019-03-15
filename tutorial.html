@@ -56,27 +56,30 @@
             <hr>
             First we import some required Python modules.
             You might need others for your test script.
-            <pre><code>
+            <pre><code class="prettyprint">
                 import random
                 import sys
                 import time
             </code></pre>
             <hr>
-            The script must import AxProf.
+            <p>The script must import AxProf.
             One way to achieve this is given below, but it assumes that AxProf is present in a particular path relative to the script.
-            A better way would be to add the AxProf directory to the PATH environment variable of your system.
-            <pre><code>
-                sys.path.append('../AxProf')
+            A better way would be to add the AxProf directory to the
+              PATH environment variable of your system.</p>
+            
+            <pre><code class="prettyprint">
+                sys.path.append('AXPROF_HOME/AxProf')
                 import AxProf
             </code></pre>
             <hr>
+            
             <p>We specify a list of configurations that will be tested.
             For this program the only configuration parameter is the number of coins.
             The list of configurations is provided as a dictionary with the name of the configuration parameter as the key and the list of values for that parameter as the value.
             AxProf will test all combinations of configuration parameters.
             For example, if there are two parameters A and B where A can be 1 or 2 and B can be 3 or 4, AxProf will test a total of four configurations:</p>
             <code>[{A:1,B:3},{A:1,B:4},{A:2,B:3},{A:2,B:4}]</code>
-            <pre><code>
+            <pre><code class="prettyprint">
                 configList = {'coins':[10,100,1000]}
             </code></pre>
             <hr>
@@ -86,13 +89,13 @@
             Each type declaration or specification must be separated by a semicolon.
             The type of the Input and the Output must always be declared.
             The return type of any external functions used must also be declared.
-            <pre><code>
+            <pre><code class="prettyprint">
                 spec='''
-                Input list of real;
-                Output real;
-                TIME coins;
-                ACC Expectation over runs [Output] == coins/2
-                '''
+                     Input list of real;
+                     Output real;
+                     TIME coins;
+                     ACC Expectation over runs [Output] == coins/2
+                     '''
             </code></pre>
 
             <p>The above specification states that the input is a list
@@ -128,7 +131,7 @@
             of integers to generate, the minimum integer value, and
             the maximum integer value.  The full list of generators is
             available in <code>AxProf/AxProfGenerators.py</code>. </p>
-            <pre><code>
+            <pre><code class="prettyprint">
                 def inputParams(config, inputNum):
                 return [config['coins'], 0, 1000000]
             </code></pre>
@@ -154,21 +157,23 @@
             In this case we do not need to call an external program.
             We flip the coins, add their face values, measure the time
             taken to do so, and return the output.
-            <pre><code>
+            <pre><code class="prettyprint">
                 def runner(inputFileName, config):
-                numCoins = config['coins']
-                random.seed() # Seed RNG
-                coinSum = 0
-                startTime = time.time() # Start measuring time
-                for i in range(numCoins):
-                # Randomly pick 0 or 1 and add it to the sum
-                # Adding more 0s or 1s will skew the results to simulate an unfair coin
-                # AxProf should be able to detect this skew (unless it is small)
-                coinSum += random.choice([0,1])
-                endTime = time.time() # Stop measuring time
-                # Prepare result; we don't measure memory but must specify it, so set it to 0
-                result = {'acc': coinSum, 'time': (endTime-startTime), 'space': 0}
-                return result
+                  numCoins = config['coins']
+                  random.seed() # Seed RNG
+                  coinSum = 0
+                
+                  startTime = time.time() # Start measuring time
+                  for i in range(numCoins):
+                  # Randomly pick 0 or 1 and add it to the sum
+                  # Adding more 0s or 1s will skew the results to simulate an unfair coin
+                  # AxProf should be able to detect this skew (unless it is small)
+                    coinSum += random.choice([0,1])
+                  endTime = time.time() # Stop measuring time
+                
+                  # Prepare result; we don't measure memory but must specify it, so set it to 0
+                  result = {'acc': coinSum, 'time': (endTime-startTime), 'space': 0}
+                  return result
             </code></pre>
             <hr>
             Finally, we invoke AxProf's checkProperties function.
@@ -188,13 +193,13 @@
             AxProf will generate all necessary code from the specification and use it to test the program.
             It is important to use <code>if __name__ == '__main__':</code> when invoking AxProf.
             We also measure the total time taken to use AxProf.</p>
-            <pre><code>
+            <pre><code class="prettyprint">
                 if __name__ == '__main__':
-                startTime = time.time() # Start measuring time
-                AxProf.checkProperties(configList, None, 1, AxProf.distinctIntegerGenerator,
-                inputParams, runner, spec=spec)
-                endTime = time.time() # Stop measuring time
-                print('Total time required for checking:',endTime-startTime,'seconds.')
+                  startTime = time.time() # Start measuring time
+                  AxProf.checkProperties(configList, None, 1, AxProf.distinctIntegerGenerator,
+                                         inputParams, runner, spec=spec)
+                  endTime = time.time() # Stop measuring time
+                  print('Total time required for checking:',endTime-startTime,'seconds.')
             </code></pre>
             <hr>
 
@@ -225,6 +230,6 @@
         </main>
       </div>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>    
   </body>
 </html>
