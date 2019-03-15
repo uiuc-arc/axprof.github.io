@@ -177,9 +177,9 @@
                 
                   startTime = time.time() # Start measuring time
                   for i in range(numCoins):
-                  # Randomly pick 0 or 1 and add it to the sum
-                  # Adding more 0s or 1s will skew the results to simulate an unfair coin
-                  # AxProf should be able to detect this skew (unless it is small)
+                    # Randomly pick 0 or 1 and add it to the sum
+                    # Adding more 0s or 1s will skew the results to simulate an unfair coin
+                    # AxProf should be able to detect this skew (unless it is small)
                     coinSum += random.choice([0,1])
                   endTime = time.time() # Stop measuring time
                 
